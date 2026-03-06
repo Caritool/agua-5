@@ -414,3 +414,233 @@ border-radius: 0 0 bc 0 → redondea la esquina inferior derecha.
     transform: translateY(0);
   }
 }
+
+/* ══════════════════════════════════════════
+ SECCIÓN 2 — CARRUSEL
+══════════════════════════════════════════ */
+#carousel-sec {
+  background: var(--plum);
+  display: flex;
+  flex-direction: column;
+}
+.car-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 32px 52px 0;
+}
+.car-header h2 {
+  font-family: "Shrikhand", cursive;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  font-weight: 400;
+  color: var(--cream);
+}
+.car-header h2 em {
+  font-style: italic;
+  color: var(--blush);
+}
+.car-counter {
+  font-family: "Ranade", sans-serif;
+  color: var(--lilac);
+  font-size: 0.95rem;
+  letter-spacing: 0.07em;
+}
+.car-counter span {
+  font-size: 1.9rem;
+  color: var(--rose);
+  font-weight: 300;
+}
+
+.car-wrap {
+  flex: 1;
+  overflow: hidden;
+  padding: 26px 52px;
+}
+.car-track {
+  display: flex;
+  gap: 26px;
+  align-items: center;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.65, 0.05, 0.35, 0.95);
+}
+
+.book-card {
+  min-width: calc(50% - 13px);
+  max-width: calc(50% - 13px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 30px 30px 26px;
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 26px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.book-card:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+.book-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blush), var(--peach));
+}
+.book-cover {
+  width: 130px;
+  height: 190px;
+  border-radius: 7px;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 5px 5px 22px rgba(0, 0, 0, 0.35);
+}
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.book-cover-ph {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  font-family: "Ranade", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.5);
+}
+.book-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.book-genre {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--peach);
+}
+.book-title {
+  font-family: "Shrikhand", cursive;
+  font-size: clamp(1.1rem, 1.8vw, 1.55rem);
+  color: var(--cream);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-top: 7px;
+}
+.book-author {
+  font-family: "Ranade", sans-serif;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--rose);
+  margin-top: 3px;
+}
+.book-stars {
+  display: flex;
+  gap: 4px;
+  margin-top: 9px;
+}
+.star {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.star.f {
+  background: var(--blush);
+}
+.star.e {
+  background: rgba(255, 255, 255, 0.17);
+}
+.book-review {
+  font-size: 0.78rem;
+  line-height: 1.72;
+  color: rgba(253, 246, 240, 0.58);
+  margin-top: 9px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+.book-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 14px;
+  font-size: 0.67rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blush);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(241, 151, 163, 0.28);
+  padding-bottom: 2px;
+  width: fit-content;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+.book-cta:hover {
+  color: var(--peach);
+  border-color: var(--peach);
+}
+
+.car-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 0 52px 26px;
+}
+.car-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-right: auto;
+}
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  transition:
+    background 0.3s,
+    transform 0.3s;
+}
+.dot.active {
+  background: var(--blush);
+  transform: scale(1.35);
+}
+.car-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+.car-btn:hover {
+  background: var(--blush);
+  border-color: var(--blush);
+}
+.car-btn svg {
+  width: 17px;
+  height: 17px;
+}
