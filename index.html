@@ -7,5 +7,66 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- ══════════════════════════════════════════
+        SECCIÓN 1 — HERO
+    ══════════════════════════════════════════ -->
+    <section id="hero">
+      <div class="blob blob-a"></div>
+      <div class="blob blob-b"></div>
+
+      <div class="top-bar">
+        <div class="nav-logo">Calíope</div>
+        <p class="top-desc">
+          Lorem ipsum dolor sit amet,<br />consectetur adipiscing elit.
+        </p>
+      </div>
+
+      <div class="hero-visual">
+        <!-- ══ CONTENEDOR DE IMAGEN (rectángulo redondeado + recortes) ══ -->
+        <div class="hero-img-wrap">
+          <img class="hero-img" src="https://upload.wikimedia.org/wikipedia/commons/d/df/Frank_Millet_-_Reading_the_Story_of_Oenone%2C_c_1882.jpg" alt="Reading the Story of Oenone">
+
+          <div class="hero-img-overlay"></div>
+          <span class="hero-img-credit">Francis Davis Millet. (1883). <em>Reading the Story of Oenone</em>.</span>
+
+          <!--
+            BOQUETES — crean los cortes rectangulares.
+            Mismo color que el fondo de la sección (--paper).
+            border-radius → redondea la esquina cóncava interior.
+            ::before / ::after → curvan las transiciones de apertura.
+          -->
+          <div class="bite-overlay-top"></div>
+          <div class="bite-overlay-bottom"></div>
+        </div>
+        <!-- /contenedor-imagen -->
+
+        <!-- Insignia sobre la imagen (entre los dos recortes) -->
+        <div class="hero-badge">Lectura<br />del mes</div>
+
+        <!-- ══ TEXTO DENTRO DE LOS BOQUETES ══
+         Posicionado sobre el área del recorte (el fondo de la página se ve,
+         así el texto se lee sobre el tono claro --paper).
+        -->
+
+        <!-- Texto del recorte superior: estadísticas, empujado hacia abajo (lado de la imagen) -->
+        <div class="bite-top-text">
+          <div class="bite-stat">
+            <span class="bite-stat-label">Género más leído</span>
+            <span class="bite-stat-val">Novela</span>
+          </div>
+          <div class="bite-stat">
+            <span class="bite-stat-label">Próximas reseñas</span>
+            <span class="bite-stat-val">4</span>
+          </div>
+        </div>
+
+        <!-- Texto del recorte inferior: título, empujado hacia arriba (lado de la imagen) -->
+        <div class="bite-bottom-text">
+          <span class="hero-tag">✦ Reseñas literarias</span>
+          <h1>Leer es vivir<br /><em>mil</em> vidas.</h1>
+        </div>
+      </div>
+      <!-- /visual-hero -->
+    </section>
   </body>
 </html>

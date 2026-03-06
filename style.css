@@ -47,3 +47,370 @@ section {
   overflow: hidden;
   position: relative;
 }
+
+/* ══════════════════════════════════════════
+ SECCIÓN 1 — HERO
+══════════════════════════════════════════ */
+#hero {
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Barra del logo */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 36px;
+  flex-shrink: 0;
+  z-index: 10;
+}
+.nav-logo {
+  font-family: "Shrikhand", cursive;
+  font-size: 1.1rem;
+  color: var(--plum);
+  letter-spacing: 0.03em;
+}
+.nav-logo span {
+  color: var(--blush);
+}
+.top-desc {
+  font-family: "Ranade", sans-serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--lilac);
+  line-height: 1.6;
+  text-align: right;
+}
+
+/* ── ÁREA DE IMAGEN ── */
+.hero-visual {
+  flex: 1;
+  position: relative;
+  margin: 0 32px 20px;
+  min-height: 0;
+}
+
+/*
+┌──────────────────────────────────────────────────┐
+│  El contenedor de imagen:                        │
+│  • border-radius da esquinas exteriores redondeadas │
+│  • overflow:hidden recorta todo lo de adentro    │
+│  • Dos divs superpuestos (mismo color que el fondo) │
+│    crean los recortes rectangulares              │
+│  • Los ::before / ::after de cada superposición  │
+│    añaden piezas de cuarto de círculo que curvan │
+│    la transición en cada apertura del recorte    │
+└──────────────────────────────────────────────────┘
+*/
+.hero-img-wrap {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--R);
+  overflow: hidden; /* recorta la imagen al rectángulo redondeado */
+}
+.hero-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #e3c0c0 0%, #817091 48%, #604f6f 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-placeholder span {
+  font-family: "Ranade", sans-serif;
+  font-size: 5rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.18);
+  user-select: none;
+}
+/* Reemplazo directo: <img class="hero-img" src="…" alt="…"> */
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 70% 50%,
+    transparent 40%,
+    rgba(96, 79, 111, 0.3) 100%
+  );
+}
+
+.hero-img-credit {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-style: italic;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ─── SUPERPOSICIONES DE RECORTE ──────────────
+ Se rellenan con el color --paper, enmascarando la imagen
+ para crear los recortes rectangulares.
+
+ Estrategia para aperturas curvas:
+   Cada div de superposición maneja el área rectangular.
+   border-radius maneja la esquina cóncava INTERIOR.
+   ::before / ::after son cuadrados pequeños de bc×bc posicionados
+   en las dos esquinas de apertura de cada recorte, con un
+   border-radius de cuarto de círculo que "recorta" la
+   esquina de la imagen, produciendo la curva convexa suave
+   donde la apertura del recorte se une al borde de la imagen.
+─────────────────────────────────────────────── */
+
+/* ── Recorte SUPERIOR (alineado: borde izquierdo + borde superior) ── */
+.bite-overlay-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--bw);
+  height: var(--bh);
+  background: var(--paper);
+  /* Solo la esquina inferior derecha es redondeada (la esquina cóncava interior) */
+  border-radius: 0 0 var(--br) 0;
+  z-index: 2;
+  /* NO poner overflow:hidden — los pseudo-elementos deben salir de este div */
+}
+
+/*
+Curva de apertura en la ESQUINA SUPERIOR DERECHA del recorte (x = bw, y = 0):
+Un cuadrado de bc×bc justo a la DERECHA de la superposición, alineado con el borde superior.
+border-radius: 0 0 0 bc → redondea la esquina inferior izquierda.
+La muesca de cuarto de círculo curva desde el borde superior hacia
+la pared derecha del recorte, dando una transición cóncava suave.
+*/
+.bite-overlay-top::before {
+  content: "";
+  position: absolute;
+  right: calc(-1 * var(--bc));
+  top: 0;
+  width: var(--bc);
+  height: var(--bc);
+  background: var(--paper);
+  border-radius: 0 0 0 var(--bc);
+}
+
+/*
+Curva de apertura en la ESQUINA INFERIOR IZQUIERDA del recorte (x = 0, y = bh):
+Un cuadrado de bc×bc justo DEBAJO de la superposición, alineado con el borde izquierdo.
+border-radius: 0 bc 0 0 → redondea la esquina superior derecha.
+La muesca curva desde la parte inferior del recorte hacia el borde izquierdo de la imagen.
+*/
+.bite-overlay-top::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: calc(-1 * var(--bc));
+  width: var(--bc);
+  height: var(--bc);
+  background: var(--paper);
+  border-radius: 0 var(--bc) 0 0;
+}
+
+/* ── Recorte INFERIOR (alineado: borde derecho + borde inferior) ── */
+.bite-overlay-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: var(--bw);
+  height: var(--bh);
+  background: var(--paper);
+  /* Solo la esquina superior izquierda es redondeada (la esquina cóncava interior) */
+  border-radius: var(--br) 0 0 0;
+  z-index: 2;
+}
+
+/*
+Curva de apertura en la ESQUINA INFERIOR IZQUIERDA (x = 100%-bw, y = 100%):
+Un cuadrado de bc×bc justo a la IZQUIERDA de la superposición, alineado con el borde inferior.
+border-radius: bc 0 0 0 → redondea la esquina superior izquierda.
+*/
+.bite-overlay-bottom::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--bc));
+  bottom: 0;
+  width: var(--bc);
+  height: var(--bc);
+  background: var(--paper);
+  border-radius: var(--bc) 0 0 0;
+}
+
+/*
+Curva de apertura en la ESQUINA SUPERIOR DERECHA (x = 100%, y = 100%-bh):
+Un cuadrado de bc×bc justo ARRIBA de la superposición, alineado con el borde derecho.
+border-radius: 0 0 bc 0 → redondea la esquina inferior derecha.
+*/
+.bite-overlay-bottom::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: calc(-1 * var(--bc));
+  width: var(--bc);
+  height: var(--bc);
+  background: var(--paper);
+  border-radius: 0 0 var(--bc) 0;
+}
+
+/* ── INSIGNIA (sobre la imagen, entre los dos recortes) ── */
+.hero-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--peach);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.54rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  line-height: 1.4;
+  z-index: 3;
+}
+
+/* ─── TEXTO DENTRO DE LOS RECORTES ────────────
+ Posicionado en hero-visual (fuera del img-wrap),
+ superpuesto exactamente donde está cada recorte.
+ El fondo de la página se ve a través del recorte,
+ así el texto es legible sobre el fondo claro --paper.
+─────────────────────────────────────────────── */
+
+/* Texto del recorte superior — estadísticas, gravedad hacia la "boca" del recorte (abajo) */
+.bite-top-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--bw);
+  height: var(--bh);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* empujar hacia abajo = hacia la imagen */
+  padding: 0 22px 22px 22px;
+  gap: 14px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+.bite-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.bite-stat-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--lilac);
+}
+.bite-stat-val {
+  font-family: "Ranade", sans-serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--plum);
+  line-height: 1;
+}
+/* línea fina en la boca del recorte */
+.bite-top-text::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 22px;
+  right: 22px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--rose), transparent);
+}
+
+/* Texto del recorte inferior — título, gravedad hacia la "boca" del recorte (arriba) */
+.bite-bottom-text {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: var(--bw);
+  height: var(--bh);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* empujar hacia arriba = hacia la imagen */
+  padding: 22px 22px 0 22px;
+  gap: 8px;
+  animation: fadeUp 0.6s 0.22s ease both;
+}
+.hero-tag {
+  font-size: 0.63rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+}
+.bite-bottom-text h1 {
+  font-family: "Shrikhand", cursive;
+  font-size: clamp(2rem, 3.4vw, 3.2rem);
+  line-height: 1.05;
+  color: var(--plum);
+  font-weight: 400;
+}
+.bite-bottom-text h1 em {
+  font-style: italic;
+  color: var(--blush);
+}
+/* línea fina en la boca del recorte */
+.bite-bottom-text::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 22px;
+  right: 22px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--rose));
+}
+
+/* Blobs */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.14;
+  pointer-events: none;
+  z-index: 0;
+}
+.blob-a {
+  width: 300px;
+  height: 300px;
+  background: var(--blush);
+  top: -80px;
+  left: -60px;
+  filter: blur(50px);
+}
+.blob-b {
+  width: 180px;
+  height: 180px;
+  background: var(--peach);
+  bottom: 60px;
+  left: 120px;
+  filter: blur(38px);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
