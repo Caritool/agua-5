@@ -21,3 +21,29 @@
   --br: 14px; /* esquina cóncava interior de cada recorte           */
   --bc: 14px; /* curva convexa donde el recorte se une al borde     */
 }
+
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Josefin Sans", sans-serif;
+  background: var(--cream);
+  color: var(--plum);
+}
+section {
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  overflow: hidden;
+  position: relative;
+}
