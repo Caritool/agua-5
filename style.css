@@ -762,3 +762,90 @@ border-radius: 0 0 bc 0 → redondea la esquina inferior derecha.
   bottom: 0;
   left: 50%;
 }
+
+/* ══════════════════════════════════════════
+ NAVEGACIÓN LATERAL FLOTANTE
+══════════════════════════════════════════ */
+.side-nav {
+  position: fixed;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.side-nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--rose);
+  opacity: 0.5;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+.side-nav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rose);
+  background: rgba(253, 246, 240, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--lilac);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    color 0.25s,
+    transform 0.25s;
+}
+.side-nav-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.side-nav-btn:hover {
+  background: var(--rose);
+  border-color: var(--blush);
+  color: var(--plum);
+  transform: scale(1.12);
+}
+.side-nav-btn.active {
+  background: var(--blush);
+  border-color: var(--blush);
+  color: #fff;
+  transform: scale(1.1);
+}
+.side-nav-btn::after {
+  content: attr(data-label);
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--plum);
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.side-nav-btn:hover::after {
+  opacity: 1;
+}
