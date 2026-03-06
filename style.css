@@ -1,62 +1,23 @@
-/*Aquí llamamos la tipografía desde Google Fonts. Luego veremos cómo hacer esto con cualquier tipografía en otros repositorios*/
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Shrikhand&display=swap');
+@import url('https://fonts.cdnfonts.com/css/ranade');
 
-body {
-  background-color: #caedfc;
-  margin: 0;
-  padding: 0;
-}
+/* ── Variables ── */
 
-h1 {
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 300;
-  margin: 0;
-  position: absolute;
-  font-size: 50px;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-}
+:root {
+  --plum: #604f6f;
+  --lilac: #817091;
+  --slate: #5a5f75;
+  --cobalt: #446594;
+  --blush: #f197a3;
+  --rose: #e3c0c0;
+  --peach: #ef8e73;
+  --cream: #fdf6f0;
+  --paper: #f9f1eb;
 
-a {
-  color: blue;
-  text-decoration: none;
-}
-
-a:hover {
-  background-color: white;
-}
-
-#contenido {
-  width: 60%;
-  height: 100%;
-  margin: 0;
-  margin-top: 100px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.texto {
-  margin: 0;
-  font-family: 'Work Sans', sans-serif;
-  font-size: 20px;
-  text-align: center;
-}
-
-.contenedor-imagen {
-  border-style: solid;
-  border-color: white;
-  border-width: 1px;
-  width: 30vw;
-  height: 30vw;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-.contenedor-imagen img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
+  /* Forma de la imagen */
+  --R: 18px; /* esquina redondeada exterior de la imagen           */
+  --bw: 29%; /* ancho del recorte (% del contenedor de imagen)     */
+  --bh: 38%; /* alto del recorte (% del contenedor de imagen)      */
+  --br: 14px; /* esquina cóncava interior de cada recorte           */
+  --bc: 14px; /* curva convexa donde el recorte se une al borde     */
 }
