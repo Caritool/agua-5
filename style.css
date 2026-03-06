@@ -644,3 +644,121 @@ border-radius: 0 0 bc 0 → redondea la esquina inferior derecha.
   width: 17px;
   height: 17px;
 }
+
+/* ══════════════════════════════════════════
+ SECCIÓN 3 — GRACIAS
+══════════════════════════════════════════ */
+#thanks {
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.thanks-blob-a {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: var(--rose);
+  opacity: 0.32;
+  filter: blur(80px);
+  top: -120px;
+  right: -100px;
+}
+.thanks-blob-b {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: var(--cobalt);
+  opacity: 0.1;
+  filter: blur(70px);
+  bottom: -90px;
+  left: -80px;
+}
+.thanks-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.thanks-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  font-weight: 500;
+}
+.thanks-title {
+  font-family: "Shrikhand", cursive;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  line-height: 0.95;
+  color: var(--plum);
+  font-weight: 400;
+}
+.thanks-title em {
+  font-style: italic;
+  color: var(--blush);
+  display: block;
+}
+.thanks-div {
+  width: 55px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blush), transparent);
+}
+.thanks-sub {
+  font-family: "Ranade", sans-serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--lilac);
+  max-width: 380px;
+  line-height: 1.65;
+}
+.ig-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 13px 26px;
+  border-radius: 50px;
+  border: 1.5px solid var(--rose);
+  color: var(--plum);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  transition: all 0.25s;
+  margin-top: 6px;
+}
+.ig-link:hover {
+  background: var(--blush);
+  border-color: var(--blush);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(241, 151, 163, 0.3);
+}
+.ig-icon {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+}
+.thanks-footer {
+  position: absolute;
+  bottom: 20px;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+.deco-vline {
+  position: absolute;
+  width: 1px;
+  height: 110px;
+  background: var(--rose);
+  opacity: 0.22;
+  bottom: 0;
+  left: 50%;
+}
